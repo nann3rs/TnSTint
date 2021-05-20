@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { AiOutlineClose, AiFillCheckCircle } from 'react-icons/ai';
 import { ModalContext } from '../../Contexts/ModalContext.jsx';
 import { Button } from '../../GlobalStyles';
@@ -17,7 +16,6 @@ import {
   CheckboxContainer,
   Label,
 } from './TintForm.styles.jsx';
-
 
 const TintForm = () => {
   const [info, setInfo] = useState(false);
@@ -55,6 +53,7 @@ const TintForm = () => {
       job: job,
       items: items,
     });
+    setInfo(false);
     toggleModal();
     toggleFilmModal();
   }
@@ -82,7 +81,7 @@ const TintForm = () => {
     <ModalWrapper>
       <ModalBackdrop />
       <ModalBox>
-        <CloseIcon onClick={toggleModal}><AiOutlineClose /></CloseIcon>
+        <CloseIcon onClick={() => {toggleModal(); setInfo(false);}}><AiOutlineClose /></CloseIcon>
           <THead>
               Select your Year, Make, & Model
           </THead><br />
@@ -102,17 +101,17 @@ const TintForm = () => {
           </SelectContainer>
           <RadioContainer>
             <Label>Pick One: </Label><br />
-            <Radio type="radio" id="doors" value="doors" name="radio" onChange={(e) => {updateJob(e); showButton();}} /> 2 Front Doors <br />
-            <Radio type="radio" id="fullCar" value="fullCar" name="radio" onChange={(e) => {updateJob(e); showButton();}} /> Full Car <br />
-            <Radio type="radio" id="removal" value="removal" name="radio" onChange={(e) => {updateJob(e); showButton();}} /> Removal Only <br />
+            <Radio type="radio" id="doors" value="65" name="radio" onChange={(e) => {updateJob(e); showButton();}} /> 2 Front Doors <br />
+            <Radio type="radio" id="fullCar" value="185" name="radio" onChange={(e) => {updateJob(e); showButton();}} /> Full Car <br />
+            <Radio type="radio" id="removal" value="80" name="radio" onChange={(e) => {updateJob(e); showButton();}} /> Removal Only <br />
           </RadioContainer>
           <CheckboxContainer>
             <Label>Additional Items: </Label><br />
-            <Checkbox type="checkbox" id="frontStrip" name="item" value="frontStrip"  onChange={getItems} />
+            <Checkbox type="checkbox" id="frontStrip" name="item" value="20"  onChange={getItems} />
             <label> + Front Strip</label><br />
-            <Checkbox type="checkbox" id="sunRoof" name="item" value="sunRoof" onChange={getItems} />
+            <Checkbox type="checkbox" id="sunRoof" name="item" value="40" onChange={getItems} />
             <label> + Sunroof</label><br />
-            <Checkbox type="checkbox" id="windshield" name="item" value="windshield" onChange={getItems} />
+            <Checkbox type="checkbox" id="windshield" name="item" value="150" onChange={getItems} />
             <label> + Windshield</label><br />
           </CheckboxContainer>
           {info ? <Button primary big bigFont bigRadius onClick={getFilm}>Choose Film</Button> : null}

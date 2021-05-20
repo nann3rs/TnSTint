@@ -98,3 +98,14 @@ export const Label = styled.label`
   letter-spacing: .5rem;
   line-height: 1.3;
 `;
+
+export const Form = styled.form`
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
+
+export const Text = styled.input`
+  margin-top: 10px;
+  margin-bottom: 0px;
+`;

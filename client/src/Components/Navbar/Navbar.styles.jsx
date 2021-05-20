@@ -70,6 +70,7 @@ export const Menu = styled.ul`
     text-align: center;
 
     @media only screen and (max-width:1000px) {
+        z-index: 999;
         display: flex;
         flex-direction: column;
         width: 100%;

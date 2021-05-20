@@ -7,6 +7,7 @@ import ModalContextProvider from './Contexts/ModalContext.jsx';
 import Main from './Components/Main/Main.jsx';
 import TintForm from './Components/TintForm/TintForm.jsx';
 import FilmForm from './Components/FilmForm/FilmForm.jsx';
+import Appointment from './Components/Appointment/Appointment.jsx';
 
 const Header = Styled.h1`
   text-align: center;
@@ -20,6 +21,7 @@ const App = () => {
         <Main />
         <TintForm />
         <FilmForm />
+        <Appointment />
       </ ModalContextProvider>
     </Router>
   );

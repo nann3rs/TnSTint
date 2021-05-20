@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AiOutlineCar } from 'react-icons/ai';
+import { ModalContext } from '../../Contexts/ModalContext.jsx';
 import { Button } from '../../GlobalStyles.jsx';
 import
 {
@@ -17,6 +18,7 @@ import
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
+    const { toggleModal, makeModal } = useContext(ModalContext);
 
     const handleClick = () => setClick(!click);
 
@@ -39,7 +41,9 @@ const Navbar = () => {
                       <MenuLink onClick="" to="/about">About</MenuLink>
                   </MenuItem>
                   <MenuItem>
-                      <MenuLink onClick="">Get A Quote</MenuLink>
+                      <MenuLink onClick={() => {
+                    makeModal();
+                    toggleModal();}}>Get A Quote</MenuLink>
                   </MenuItem>
                   <MenuItemBtn>
                       <MenuLinkBtn to="/contact">

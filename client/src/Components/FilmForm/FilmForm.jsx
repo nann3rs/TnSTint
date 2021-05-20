@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { AiOutlineClose, AiFillCheckCircle } from 'react-icons/ai';
 import { ModalContext } from '../../Contexts/ModalContext.jsx';
 import { Button } from '../../GlobalStyles';
@@ -19,7 +18,13 @@ import {
 const FilmForm = () => {
   const [quote, setQuote] = useState(false);
   const [film, setFilm] = useState('');
-  const { filmDisplay, toggleFilmModal } = useContext(ModalContext);
+  const {
+    filmDisplay,
+    toggleFilmModal,
+    toggleApptModal,
+    carInfo,
+    updateJobQuote,
+  } = useContext(ModalContext);
 
   const showQuoteButton = () => {
     setQuote(true);
@@ -29,25 +34,40 @@ const FilmForm = () => {
     setFilm(e.target.value);
   }
 
+  const updateQuote = () => {
+    let sum = 0;
+    sum += Number.parseInt(carInfo.job);
+    if (carInfo.items.length > 0) {
+      for (let i = 0; i < carInfo.items.length; i++) {
+        sum += Number.parseInt(carInfo.items[i]);
+      }
+    }
+    sum += Number.parseInt(film);
+    updateJobQuote(sum);
+    setQuote(false);
+    toggleFilmModal();
+    toggleApptModal();
+  }
+
   return filmDisplay ? (
     <ModalWrapper>
       <ModalBackdrop />
       <ModalBox>
-        <CloseIcon onClick={toggleFilmModal}><AiOutlineClose /></CloseIcon>
+        <CloseIcon onClick={() => {toggleFilmModal(); setQuote(false);}}><AiOutlineClose /></CloseIcon>
 
           <THead>
               Select your Film <br/>
           </THead><br />
           <FilmContainer>
             <RadioContainer>
-              <Radio type="radio" value="75" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}} /> 75%
-              <Radio type="radio" value="35" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}}/> 35%
-              <Radio type="radio" value="20" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}}/> 20%
-              <Radio type="radio" value="5" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}}/> 5%
+              <Radio type="radio" value="100" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}} /> 5%
+              <Radio type="radio" value="25" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}}/> 20%
+              <Radio type="radio" value="0" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}}/> 35%
+              <Radio type="radio" value="0" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}}/> 70%
             </RadioContainer>
           </FilmContainer>
 
-          {quote ? <Button primary big bigFont bigRadius onClick="">Get Quote</Button> : null}
+          {quote ? <Button primary big bigFont bigRadius onClick={updateQuote}>Get Quote</Button> : null}
       </ModalBox>
     </ModalWrapper>
   ) : null;
