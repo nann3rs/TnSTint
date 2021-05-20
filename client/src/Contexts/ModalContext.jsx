@@ -1,49 +1,45 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState } from 'react';
 
 export const ModalContext = createContext();
 
 const ModalContextProvider = (props) => {
   const [display, setDisplay] = useState(false);
-  const [info, setInfo] = useState([]);
-  const [year, setYear] = useState([]);
-  const [make, setMake] = useState([]);
-  const [model, setModel] = useState([]);
+  const [years, setYears] = useState([]);
+  const [makes, setMakes] = useState([]);
+  const [models, setModels] = useState([]);
 
-  let allInfo = [];
-
-  // const getProducts = (endpoint) => fetch(`api/${endpoint}`)
-  //   .then((res) => res.json());
+  const getInfo = (endpoint) => fetch(`api/${endpoint}`)
+    .then((res) => res.json());
 
   const makeModal = () => {
     const yearInfo = [];
     const makeInfo = [];
+
+    for (let i = 2021; i >= 1980; i--) {
+      yearInfo.push(i);
+    }
+    setYears(yearInfo);
+
+    getInfo('vehicles/getallmakes?format=json')
+      .then((vehicle) => {
+        for (let i = 0; i <= 100; i++) {
+          makeInfo.push(vehicle.Results[i]['Make_Name']);
+        }
+        setMakes(makeInfo);
+      });
+  };
+
+  const getModels = (info) => {
     const modelInfo = [];
 
-  //   getProducts(`products/${currProduct.currProd}`)
-  //     .then((data1) => {
-  //       data1.features.forEach((feat) => {
-  //         featList1.push(`${feat.value} ${feat.feature}`);
-  //         allFeat.push(`${feat.value} ${feat.feature}`);
-  //       });
-  //       setProd1Char({
-  //         name: data1.name,
-  //         feat: featList1,
-  //       });
-  //     });
-  //   getProducts(`products/${product}`)
-  //     .then((data2) => {
-  //       data2.features.forEach((feat) => {
-  //         featList2.push(`${feat.value} ${feat.feature}`);
-  //         allFeat.push(`${feat.value} ${feat.feature}`);
-  //       });
-  //       setProd2Char({
-  //         name: data2.name,
-  //         feat: featList2,
-  //       });
-  //     });
-
-  //   allFeat = [...new Set(allFeat)];
-  //   setCharacteristics(allFeat);
+    const make = info['make'].toLowerCase();
+    getInfo(`vehicles/getmodelsformakeyear/make/${make}/modelyear/${info.year}/vehicleType/passenger?format=json`)
+      .then((vehicle) => {
+        vehicle['Results'].forEach((car) => {
+          modelInfo.push(car['Model_Name']);
+        })
+        setModels(modelInfo);
+      });
   };
 
   const toggleModal = () => {
@@ -54,10 +50,11 @@ const ModalContextProvider = (props) => {
     <ModalContext.Provider value={{
       display,
       toggleModal,
-      year,
-      make,
-      model,
-      info,
+      makeModal,
+      getModels,
+      years,
+      makes,
+      models,
     }}
     >
       {props.children}

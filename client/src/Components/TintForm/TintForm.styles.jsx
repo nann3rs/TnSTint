@@ -23,35 +23,78 @@ export const ModalBox = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 50%;
-  width: 60%;
+  height: 75%;
+  width: 80%;
   overflow-y: auto;
   background-color: white;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.25);
   z-index: 101;
   padding: 40px;
+  text-align: center;
 `;
 
 export const CloseIcon = styled.div`
   text-align: right;
 `;
 
-export const Grid = styled.div`
-  border: 1px solid black;
-`;
-
-export const Row = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-export const Col = styled.div`
-  flex: ${(props) => props.size};
-  text-align: center;
-`;
-
 export const THead = styled.div`
-  border: 1px solid black;
   text-align: center;
-  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: clamp(1rem, 5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: .5rem;
+  line-height: 1.3;
+`;
+
+export const Select = styled.select`
+  display: inline-block;
+  width: 20%;
+  margin: 15px;
+  margin-left: 10px;
+  border-radius: 0.12em;
+  font-weight: 300;
+  transition: all 0.2s;
+  max-height:250px;
+  overflow: auto;
+
+  @media only screen and (max-width:1000px) {
+    margin: 10px;
+    width: 40%;
+  }
+
+  @media only screen and (max-width:375px) {
+    margin: 10px;
+    width: 75%;
+  }
+`;
+
+export const SelectContainer = styled.div`
+  text-align: center;
+`;
+
+export const Radio = styled.input`
+
+`;
+
+export const RadioContainer = styled.div`
+  margin-top: 25px;
+  text-align: center;
+`;
+
+export const Checkbox = styled.input`
+
+`;
+
+export const CheckboxContainer = styled.div`
+  margin-top: 25px;
+  margin-bottom: 30px;
+  text-align: center;
+`;
+
+export const Label = styled.label`
+  font-size: clamp(1rem, 5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: .5rem;
+  line-height: 1.3;
 `;

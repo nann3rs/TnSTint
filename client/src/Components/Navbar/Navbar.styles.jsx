@@ -9,14 +9,14 @@ export const Nav = styled.nav`
     position: sticky;
     top: 0;
     z-index: 999;
-    height: 75px;
+    height: 60px;
     background-color: #fff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
     display: flex;
     justify-content: center;
     align-items: center;
     color: #808080;
-    opacity: 90%;
+    opacity: 85%;
 `;
 
 export const NavbarContainer = styled(Container)`
