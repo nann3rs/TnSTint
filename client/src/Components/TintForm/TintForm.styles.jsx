@@ -74,7 +74,7 @@ export const SelectContainer = styled.div`
 `;
 
 export const Radio = styled.input`
-
+  margin-left: 10px;
 `;
 
 export const RadioContainer = styled.div`

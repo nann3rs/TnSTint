@@ -22,13 +22,17 @@ import {
 const TintForm = () => {
   const [info, setInfo] = useState(false);
   const [newYear, setNewYear] = useState(0);
+  const [job, setJob] = useState(null);
+  const [items, setItems] = useState([]);
   const {
     display,
     toggleModal,
+    toggleFilmModal,
     getModels,
     years,
     makes,
     models,
+    updateCarInfo,
   } = useContext(ModalContext);
 
   let newMake;
@@ -44,6 +48,34 @@ const TintForm = () => {
 
   const showButton = () => {
     setInfo(true);
+  }
+
+  const getFilm = () => {
+    updateCarInfo({
+      job: job,
+      items: items,
+    });
+    toggleModal();
+    toggleFilmModal();
+  }
+
+  const getItems = (e) => {
+    if (e.target.checked) {
+      let newItems = items;
+      newItems.push(e.target.value);
+      let uniqueItems = [...new Set(newItems)];
+      setItems(uniqueItems);
+    } else {
+      let newItems = items;
+      newItems = newItems.filter((item) => (
+        item === e.target.value
+      ));
+      setItems(newItems);
+    }
+  }
+
+  const updateJob = (e) => {
+    setJob(e.target.value);
   }
 
   return display ? (
@@ -70,20 +102,20 @@ const TintForm = () => {
           </SelectContainer>
           <RadioContainer>
             <Label>Pick One: </Label><br />
-            <Radio type="radio" value="doors" name="radio" onChange={showButton} /> 2 Front Doors <br />
-            <Radio type="radio" value="fullCar" name="radio" /> Full Car <br />
-            <Radio type="radio" value="removal" name="radio" /> Removal Only <br />
+            <Radio type="radio" id="doors" value="doors" name="radio" onChange={(e) => {updateJob(e); showButton();}} /> 2 Front Doors <br />
+            <Radio type="radio" id="fullCar" value="fullCar" name="radio" onChange={(e) => {updateJob(e); showButton();}} /> Full Car <br />
+            <Radio type="radio" id="removal" value="removal" name="radio" onChange={(e) => {updateJob(e); showButton();}} /> Removal Only <br />
           </RadioContainer>
           <CheckboxContainer>
             <Label>Additional Items: </Label><br />
-            <Checkbox type="checkbox" checked="" onChange="" />
-            <span> + Front Strip</span><br />
-            <Checkbox type="checkbox" checked="" onChange="" />
-            <span> + Sunroof</span><br />
-            <Checkbox type="checkbox" checked="" onChange="" />
-            <span> + Windshield</span><br />
+            <Checkbox type="checkbox" id="frontStrip" name="item" value="frontStrip"  onChange={getItems} />
+            <label> + Front Strip</label><br />
+            <Checkbox type="checkbox" id="sunRoof" name="item" value="sunRoof" onChange={getItems} />
+            <label> + Sunroof</label><br />
+            <Checkbox type="checkbox" id="windshield" name="item" value="windshield" onChange={getItems} />
+            <label> + Windshield</label><br />
           </CheckboxContainer>
-          {info ? <Button primary big bigFont bigRadius onClick="">Choose Film</Button> : null}
+          {info ? <Button primary big bigFont bigRadius onClick={getFilm}>Choose Film</Button> : null}
       </ModalBox>
     </ModalWrapper>
   ) : null;

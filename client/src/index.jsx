@@ -6,6 +6,7 @@ import GlobalStyles from './GlobalStyles.jsx';
 import ModalContextProvider from './Contexts/ModalContext.jsx';
 import Main from './Components/Main/Main.jsx';
 import TintForm from './Components/TintForm/TintForm.jsx';
+import FilmForm from './Components/FilmForm/FilmForm.jsx';
 
 const Header = Styled.h1`
   text-align: center;
@@ -18,6 +19,7 @@ const App = () => {
       <ModalContextProvider>
         <Main />
         <TintForm />
+        <FilmForm />
       </ ModalContextProvider>
     </Router>
   );
