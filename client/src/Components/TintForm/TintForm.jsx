@@ -20,8 +20,9 @@ import {
 const TintForm = () => {
   const [info, setInfo] = useState(false);
   const [newYear, setNewYear] = useState(0);
-  const [job, setJob] = useState(null);
+  const [job, setJob] = useState({price: 0, service: null});
   const [items, setItems] = useState([]);
+  const [service, setServices] = useState([]);
   const {
     display,
     toggleModal,
@@ -31,6 +32,7 @@ const TintForm = () => {
     makes,
     models,
     updateCarInfo,
+    updatePriceInfo,
   } = useContext(ModalContext);
 
   let newMake;
@@ -50,7 +52,11 @@ const TintForm = () => {
 
   const getFilm = () => {
     updateCarInfo({
-      job: job,
+      job: job.service,
+      items: items,
+    });
+    updatePriceInfo({
+      job: job.price,
       items: items,
     });
     setInfo(false);
@@ -61,20 +67,29 @@ const TintForm = () => {
   const getItems = (e) => {
     if (e.target.checked) {
       let newItems = items;
+      let newService = service;
       newItems.push(e.target.value);
+      newService.push(e.target.id);
       let uniqueItems = [...new Set(newItems)];
+      let uniqueServices = [...new Set(newService)];
       setItems(uniqueItems);
+      setServices(uniqueServices);
     } else {
       let newItems = items;
+      let newService = service;
       newItems = newItems.filter((item) => (
         item === e.target.value
       ));
+      newService = newService.filter((data) => (
+        data === e.target.id
+      ));
       setItems(newItems);
+      setServices(newService);
     }
   }
 
   const updateJob = (e) => {
-    setJob(e.target.value);
+    setJob({price:e.target.value, service:e.target.id});
   }
 
   return display ? (

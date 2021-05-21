@@ -11,6 +11,7 @@ import {
   Label,
   Form,
   Text,
+  BigText,
 } from '../TintForm/TintForm.styles.jsx';
 
 
@@ -20,6 +21,7 @@ const Appointment = () => {
   const {
     apptDisplay,
     toggleApptModal,
+    toggleConfirm,
     jobQuote,
   } = useContext(ModalContext);
 
@@ -36,7 +38,7 @@ const Appointment = () => {
           <THead>
               Your Quote <br/>
           </THead><br />
-          <Label>${jobQuote}</Label><br />
+          <BigText>${jobQuote}</BigText><br />
           <Form>
             <Label>First Name</Label><br />
             <Text type="text" id="firstName" name="firstName" placeholder="First Name" onChange="" required/><br />
@@ -50,7 +52,7 @@ const Appointment = () => {
             <Text type="date" id="start" name="date" onChange="" required/> <br />
           </Form>
 
-          <Button primary big bigFont bigRadius onClick="">Make an Appointment</Button>
+          <Button primary big bigFont bigRadius onClick={toggleConfirm}>Make an Appointment</Button>
       </ModalBox>
     </ModalWrapper>
   ) : null;

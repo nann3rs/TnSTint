@@ -22,7 +22,7 @@ const FilmForm = () => {
     filmDisplay,
     toggleFilmModal,
     toggleApptModal,
-    carInfo,
+    priceInfo,
     updateJobQuote,
   } = useContext(ModalContext);
 
@@ -36,10 +36,10 @@ const FilmForm = () => {
 
   const updateQuote = () => {
     let sum = 0;
-    sum += Number.parseInt(carInfo.job);
-    if (carInfo.items.length > 0) {
-      for (let i = 0; i < carInfo.items.length; i++) {
-        sum += Number.parseInt(carInfo.items[i]);
+    sum += Number.parseInt(priceInfo.job);
+    if (priceInfo.items.length > 0) {
+      for (let i = 0; i < priceInfo.items.length; i++) {
+        sum += Number.parseInt(priceInfo.items[i]);
       }
     }
     sum += Number.parseInt(film);

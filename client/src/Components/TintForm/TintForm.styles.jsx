@@ -47,6 +47,15 @@ export const THead = styled.div`
   line-height: 1.3;
 `;
 
+export const BigText = styled.h1`
+  text-align: center;
+  margin-bottom: 0;
+  font-weight: 900;
+  letter-spacing: .5rem;
+  line-height: 1.3;
+  color: #FBC740;
+`;
+
 export const Select = styled.select`
   display: inline-block;
   width: 20%;

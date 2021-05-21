@@ -6,12 +6,13 @@ const ModalContextProvider = (props) => {
   const [display, setDisplay] = useState(false);
   const [filmDisplay, setFilmDisplay] = useState(false);
   const [apptDisplay, setApptDisplay] = useState(false);
+  const [confirmDisplay, setConfirmDisplay] = useState(false);
   const [years, setYears] = useState([]);
   const [makes, setMakes] = useState([]);
   const [models, setModels] = useState([]);
   const [carInfo, setCarInfo] = useState({});
   const [jobQuote, setJobQuote] = useState(0);
-
+  const [priceInfo, setPriceInfo] =useState({});
   const getInfo = (endpoint) => fetch(`api/${endpoint}`)
     .then((res) => res.json());
 
@@ -58,13 +59,21 @@ const ModalContextProvider = (props) => {
     setApptDisplay(!apptDisplay);
   };
 
+  const toggleConfirm = () => {
+    setConfirmDisplay(!confirmDisplay);
+  };
+
   const updateCarInfo = (obj) => {
     setCarInfo(obj);
   };
 
+  const updatePriceInfo = (obj) => {
+    setPriceInfo(obj);
+  };
+
   const updateJobQuote = (price) => {
     setJobQuote(price);
-  }
+  };
 
   return (
     <ModalContext.Provider value={{
@@ -78,11 +87,15 @@ const ModalContextProvider = (props) => {
       makes,
       models,
       carInfo,
+      priceInfo,
       jobQuote,
       updateCarInfo,
+      updatePriceInfo,
       updateJobQuote,
       apptDisplay,
       toggleApptModal,
+      toggleConfirm,
+      confirmDisplay,
     }}
     >
       {props.children}
