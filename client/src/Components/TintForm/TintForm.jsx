@@ -20,6 +20,8 @@ import {
 const TintForm = () => {
   const [info, setInfo] = useState(false);
   const [newYear, setNewYear] = useState(0);
+  const [newModel, setNewModel] = useState('');
+  const [newMake, setNewMake] = useState('');
   const [job, setJob] = useState({price: 0, service: null});
   const [items, setItems] = useState([]);
   const [service, setServices] = useState([]);
@@ -35,15 +37,18 @@ const TintForm = () => {
     updatePriceInfo,
   } = useContext(ModalContext);
 
-  let newMake;
-
   const updateYear = (e) => {
     setNewYear(e.target.value);
   }
 
   const updateMake = (e) => {
-    newMake = e.target.value;
-    getModels({year: newYear, make: newMake});
+    let make = e.target.value;
+    setNewMake(make);
+    getModels({year: newYear, make: make});
+  }
+
+  const updateModel = (e) => {
+    setNewModel(e.target.value);
   }
 
   const showButton = () => {
@@ -52,8 +57,9 @@ const TintForm = () => {
 
   const getFilm = () => {
     updateCarInfo({
+      car: `${newYear} ${newMake} ${newModel}`,
       job: job.service,
-      items: items,
+      items: service,
     });
     updatePriceInfo({
       job: job.price,
@@ -89,7 +95,7 @@ const TintForm = () => {
   }
 
   const updateJob = (e) => {
-    setJob({price:e.target.value, service:e.target.id});
+    setJob({ price: e.target.value, service: e.target.id });
   }
 
   return display ? (
@@ -109,7 +115,7 @@ const TintForm = () => {
               <option value="none">Select a Make</option>
               {makes.map((make) => <option id={make} name={make}>{make}</option>)}
             </Select>
-            <Select id="model">
+            <Select id="model" onChange={updateModel}>
               <option value="none">Select a Model</option>
               {models.map((model) => <option id={model} name={model}>{model}</option>)}
             </Select>

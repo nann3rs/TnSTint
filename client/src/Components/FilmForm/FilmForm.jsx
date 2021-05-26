@@ -17,21 +17,24 @@ import {
 
 const FilmForm = () => {
   const [quote, setQuote] = useState(false);
-  const [film, setFilm] = useState('');
+  const [filmSelect, setFilmSelect] = useState('');
+  const [filmPrice, setFilmPrice] = useState('');
   const {
     filmDisplay,
     toggleFilmModal,
     toggleApptModal,
     priceInfo,
     updateJobQuote,
+    updateFilm,
   } = useContext(ModalContext);
 
   const showQuoteButton = () => {
     setQuote(true);
   }
 
-  const updateFilm = (e) => {
-    setFilm(e.target.value);
+  const updateFilmSelect = (e) => {
+    setFilmSelect(e.target.id);
+    setFilmPrice(e.target.value);
   }
 
   const updateQuote = () => {
@@ -42,9 +45,10 @@ const FilmForm = () => {
         sum += Number.parseInt(priceInfo.items[i]);
       }
     }
-    sum += Number.parseInt(film);
+    sum += Number.parseInt(filmPrice);
     updateJobQuote(sum);
     setQuote(false);
+    updateFilm(filmSelect);
     toggleFilmModal();
     toggleApptModal();
   }
@@ -60,10 +64,10 @@ const FilmForm = () => {
           </THead><br />
           <FilmContainer>
             <RadioContainer>
-              <Radio type="radio" value="100" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}} /> 5%
-              <Radio type="radio" value="25" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}}/> 20%
-              <Radio type="radio" value="0" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}}/> 35%
-              <Radio type="radio" value="0" name="radio" onChange={(e) => { updateFilm(e); showQuoteButton();}}/> 70%
+              <Radio type="radio" id="5" value="100" name="radio" onChange={(e) => { updateFilmSelect(e); showQuoteButton();}} /> 5%
+              <Radio type="radio" id="20" value="25" name="radio" onChange={(e) => { updateFilmSelect(e); showQuoteButton();}}/> 20%
+              <Radio type="radio" id="35" value="0" name="radio" onChange={(e) => { updateFilmSelect(e); showQuoteButton();}}/> 35%
+              <Radio type="radio" id="70" value="0" name="radio" onChange={(e) => { updateFilmSelect(e); showQuoteButton();}}/> 70%
             </RadioContainer>
           </FilmContainer>
 

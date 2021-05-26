@@ -21,6 +21,9 @@ const Confirmation = () => {
     toggleConfirm,
     confirmDisplay,
     carInfo,
+    jobQuote,
+    customer,
+    film,
   } = useContext(ModalContext);
 
   return confirmDisplay ? (
@@ -33,16 +36,17 @@ const Confirmation = () => {
           </BigText><br />
           <CardContainer>
             <DateConfirm>
-              Appointment Time
+            <Label>Appointment Date:</Label> {customer.date}
             </DateConfirm>
             <Location>
-              Address of Customer
+              <Label>Location:</Label> {customer.address}
             </Location>
             <Service>
-              Service: {carInfo.job} <br />
-              Film: <br />
-              Estimated Duration: <br />
-              Total: <br />
+              <Label>Vehicle:</Label> {carInfo.car}<br />
+              <Label>Service: </Label>{carInfo.job.toUpperCase()} {carInfo.items.length > 0 ? (carInfo.items.map((item) => <span>+ {item} </span>)) : null}<br />
+              <Label>Film:</Label> {film}%<br />
+              <Label>Estimated Duration:</Label> {carInfo.job.toLowerCase() === 'fullcar' ? `~ 2-3 hours`: `~ 1 hour`}<br />
+              <Label>Total:</Label> ${jobQuote}<br />
             </Service>
           </CardContainer>
       </ModalBox>

@@ -26,7 +26,7 @@ const Hero = () => {
                   </HeroTitle>
                   <HeroSubTitle>Professional, Clean, Quality</HeroSubTitle>
                   <HeroText>
-                      Some random text here
+                     Where Our Customers are Ohana
                   </HeroText>
                   <HeroBtn onClick={() => {
                     makeModal();
