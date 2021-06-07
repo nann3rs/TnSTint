@@ -2,8 +2,8 @@ const http = require('http');
 const express = require('express');
 const path = require('path');
 const controllers = require('./Controllers');
-var accountSid = 'ACCOUNT_SID';
-var authToken = 'AUTH_TOKEN';
+var accountSid = 'ACc5fc1307271b2bc90ec5462b37381733';
+var authToken = 'b404b76b2c22a84ed42630a2321f6faf';
 
 var twilio = require('twilio');
 var client = new twilio(accountSid, authToken);
@@ -19,8 +19,8 @@ app.get('/api/*', controllers.get);
 app.post('/sms', (req, res) => {
   client.messages.create({
     body: req.body.data,
-    to: 'PHONE_NUMBER',
-    from: 'TWILIO#'
+    to: '+13105030380',
+    from: '+12182154389'
   })
   .then((message) => console.log(message.sid));
 })
